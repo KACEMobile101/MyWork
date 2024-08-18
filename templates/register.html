@@ -1,0 +1,60 @@
+<html>
+  <head>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyC1hbaqw1DH3uWXYw920bcUsBClsiJpadY",
+      AuthDomain: "mywork-71c0a.firebaseapp.com",
+      projectId: "mywork-71c0a",
+      storageBucket: "mywork-71c0a.appspot.com",
+      messagingSenderId: "386766424926",
+      appId: "1:386766424926:web:c01a407d8efd02c49e9dcf"
+    };
+    
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    
+    //inputs
+    //const show = () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+    //  console.log(email, password);
+    //}
+    // submit button
+    
+    const submit = document.getElementById('submit')
+    //submit.addEventListener('click', show);
+    submit.addEventListener("click", (e) => {
+      e.preventDefault()
+      createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        alert("Creating Account...")
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        alert(errorMessage)
+        // ..
+      });
+    })
+    </script>
+  </head>
+  <body>
+    <h1>Registration</h1>
+    <label for="username">Username</label>
+    <input type="email" placeholder="Email" id="email" required>
+    <br><br>
+    <label for="password">Password</label>
+    <input type="password" placeholder="Password" id="password" required>
+    <br><br>
+    <button id="submit" type="submit">Register</button>
+  </body>
+</html>
